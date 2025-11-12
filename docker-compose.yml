@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:3001
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+      - /app/frontend/.next
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+    volumes:
+      - ~/.kube:/root/.kube:ro
+      - ./backend:/app/backend
+      - /app/backend/node_modules
+    # Uncomment the following if running in Kubernetes cluster
+    # serviceAccountName: kubernetes-dashboard
+    # If running outside cluster, mount kubeconfig:
+    # volumes:
+    #   - ~/.kube:/root/.kube:ro
+
+volumes:
+  kubeconfig:
+
