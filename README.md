@@ -1,4 +1,4 @@
-# Kubernetes Dashboard
+# Kubernetes-Dashboard
 
 A beautiful dark glassy Kubernetes dashboard for visualizing and managing K8s clusters. Built with Next.js, TypeScript, and Express.js, featuring an Apple-inspired glassmorphism design.
 
